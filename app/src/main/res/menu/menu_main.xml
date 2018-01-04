@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<menu>: Root node that contains one or more item.-->
+<!--<item>: It represents menu items.-->
+<!--android:id: Unique ID for the item.-->
+<!--android:title : Title for the item.-->
+<!--android:showAsAction : It specifies how an item to be shown as an action item. The value can be ifRoom, never, withText, always, collapseActionView.-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--above orderInCategory = 1, smaller than below scan/stop, so small number will be positioned on left-->
+
+    <item android:id="@+id/ble_device_scan_menu"
+          android:title="@string/ble_device_scan"
+          app:showAsAction="never"/>
+    <!--use app:showAsAction instead of android:showAsAction will be able to displayQuantity item on Action bar ifRoom, or become ... if no room -->
+
+</menu>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+ 
+    <!--<ImageView-->
+        <!--android:id="@+id/grid_item_image"-->
+        <!--android:layout_width="50px"-->
+        <!--android:layout_height="50px"-->
+        <!--android:layout_marginRight="10px"-->
+        <!--android:src="@drawable/android_logo" >-->
+    <!--</ImageView>-->
+ <!---->
+    <!--<TextView-->
+        <!--android:id="@+id/grid_item_label"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@+id/label"-->
+        <!--android:layout_marginTop="5px"-->
+        <!--android:textSize="15px" >-->
+    <!--</TextView>-->
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        >
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Toppings"-->
+            <!--android:textSize="15sp"/>-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/whipped_cream_checkbox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:onClick="addWhippedCream"-->
+            <!--android:text="@string/whipped_cream"-->
+            <!--android:textSize="15sp"/>-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/chocolate_checkbox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:onClick="addChocolate"-->
+            <!--android:text="@string/chocolate"-->
+            <!--android:textSize="15sp"/>-->
+
+
+        <ImageView
+            android:id="@+id/menuItemImage"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:src="@drawable/coffee"/>
+
+        <TextView
+            android:id="@+id/menuItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="new item"
+            android:textSize="15sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_decrement"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="numberSigned"
+                android:paddingLeft="8dp"
+                android:paddingRight="15dp"
+                android:text="0"
+                android:textSize="25sp"/>
+
+            <Button
+                android:id="@+id/bt_increment"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+ 
+</LinearLayout>

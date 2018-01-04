@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">POS Demo</string>
+    <string name="ble_device_scan">BLE Device Scan</string>
+    <string name="scan">Scan</string>
+
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+
+    <string name="initial_price">Price: $0.00</string>
+    <string name="price">Price</string>
+    <string name="whipped_cream">"Whipped cream   50¢"</string>
+    <string name="chocolate">"Chocolate             50¢"</string>
+    <string name="fifty_cups">"You can't have more than 50 coffees. Seriously, you've got a problem."</string>
+    <string name="negative_cups">"You can't have negative coffees!"</string>
+    <string name="pay">"Pay"</string>
+    <string name="cancel">"Cancel"</string>
+    <string name="refresh">refresh</string>
+    <string name="menu_title">Order menu</string>
+    <string name="max_reached">Max reached.</string>
+
+</resources>
