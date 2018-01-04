@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">POS Demo</string>
+    <string name="app_name">POSDemo</string>
     <string name="ble_device_scan">BLE Device Scan</string>
     <string name="scan">Scan</string>
 

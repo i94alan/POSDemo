@@ -50,8 +50,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.braulio.chairman.adapter.ImageAdapter;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -274,20 +276,28 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
         super.onDestroy();
         doUnbindService();
 //        unbindService(mServiceConnection);
+        //if launch app, before bindService, and exit app, then it will come here, unbindService
+        //  java.lang.IllegalArgumentException: Service not registered: xac.com.ble.DeviceControlActivity$5@bd6eeaf, then app will crash
         mBluetoothLeService = null;
+    }
+
+    void doBindService() {
+        // Establish a connection with the service.  We use an explicit
+        // class name because we want a specific service implementation that
+        // we know will be running in our own process (and thus won't be
+        // supporting component replacement by other applications).
+        Intent gattServiceIntent = new Intent(DeviceScanActivity.this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //this will then create Service
+        //    private final ServiceConnection mServiceConnection = new ServiceConnection()
+        mIsBound = true;
     }
 
 
     void doUnbindService() {
         if (mIsBound) {
-            // If we have received the service, and hence registered with
-            // it, then now is the time to unregister.
-
-
             // Detach our existing connection.
-            unbindService(mServiceConnection);
+            unbindService(mServiceConnection); //and eventually this will call BluetoothLeService's onUnbind (overriding from Service class), and onUnbind call BluetoothLeService's close()
             mIsBound = false;
-
         }
     }
 
@@ -336,12 +346,7 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
                 mBluetoothAdapter.stopLeScan(mLeScanCallback);
                 mScanning = false;
             }
-
-            Intent gattServiceIntent = new Intent(DeviceScanActivity.this, BluetoothLeService.class);
-            bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //this will then create Service
-            //but if service still binded, it will bind again, hence will callback onServiceConnected, and then no connect(mDeviceAddress)
-            mIsBound = true;
-            //    private final ServiceConnection mServiceConnection = new ServiceConnection()
+            doBindService();
         }
     }
 
@@ -451,7 +456,7 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
 
     private void scanLeDevice(final boolean enable) {
         if (enable) {
-
+            doUnbindService();//this will ensure that when pressing button "scan", it will unbind the previous bound service,
             // Stops scanning after a pre-defined scan period, 10 seconds
             //mHandler will fire a separate thread after scan_period
             mHandler.postDelayed(new Runnable() {
@@ -627,9 +632,12 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
                                     mHandler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+                                            Calendar c = Calendar.getInstance();
+                                            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                                            String formattedDate = df.format(c.getTime());
                                             final AlertDialog.Builder receipt = new AlertDialog.Builder(DeviceScanActivity.this);
                                             receipt.setTitle("Receipt");
-                                            receipt.setMessage("Item: coffee\nDate: 2017/11/16\nAmount: "+ totalPrice +"\n");
+                                            receipt.setMessage("Item: coffee\nDate: "+ formattedDate +"\nAmount: "+ totalPrice +"\n");
                                             receipt.setPositiveButton(android.R.string.ok, null);
                                             receipt.setOnDismissListener(new DialogInterface.OnDismissListener(){
 
@@ -642,7 +650,6 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
                                             totalPrice = 0;
                                         }
                                     }, RECEIPT_DELAY);
-
                                 }
                                 mBluetoothLeService.sendData(Utility.XAC_ACK);
                                 dumpLog("Response", "Read Data", cmd); //here will cause app to crash
@@ -903,7 +910,7 @@ public class DeviceScanActivity extends Activity /*ListActivity*/ {
 
         public void payOrder(View view){
             if (mBluetoothLeService != null) {
-                final byte[] cmd_DI3={0x44,0x49,0x33};
+                final byte[] cmd_DI3 = {0x44,0x49,0x33};
                 mBluetoothLeService.sendData(Utility.getCommand(cmd_DI3));
             }
     //            Toast.makeText(DeviceScanActivity.this, "submit order", Toast.LENGTH_SHORT).show();
